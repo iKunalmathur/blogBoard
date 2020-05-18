@@ -24,7 +24,7 @@
             <div class="illustration"><img class="img-fluid" style="color: #db4437;" src="assets/img/DEVSOLO_NEW_ICON_2020-05-05-RYG.png"></div>
             <div class="form-group">
                 {{-- <input class="border rounded form-control" type="email" name="email" placeholder="Email"> --}}
-                <input id="email" type="email" class="border rounded form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input id="email" type="email" class="border rounded form-control @error('email') is-invalid @enderror" placeholder="E-mail" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
