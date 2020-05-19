@@ -13,8 +13,24 @@
 
 Route::get('/', function () {
     return view('auth.login');
+    // return view('welcome');
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::group(['namespace'=> 'Admin','middleware'=>'auth:admin'],function(){
+Route::group(['middleware'=>'auth:web'],function(){
+    //Admin Home-Routes
+    Route::get('/home','HomeController@index')->name('home');
+    //user routes
+    Route::resource('/user','UserController');
+    //role routes
+    Route::resource('/role','RoleController');
+    //permissions routes
+    Route::resource('/permission','PermissionController');
+    //Post Routes
+    Route::resource('/post','PostController');
+    //Tag Routes
+    Route::resource('/tag','TagController');
+    //Category Routes
+    Route::resource('/category','CategoryController');
+});
