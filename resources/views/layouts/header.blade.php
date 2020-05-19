@@ -7,9 +7,14 @@
       </div>
     </form>
     <ul class="nav navbar-nav flex-nowrap ml-auto">
-      <div class="d-none d-sm-block topbar-divider"></div>
+      <style>
+      @media only screen and (max-width: 992px) {
+        .mobileHide{ display: none;;}
+      }
+      </style>
+      <div class="d-none d-sm-block topbar-divider "></div>
       <li class="nav-item pulse animated dropdown no-arrow" role="presentation" style="padding-top: 5px;">
-        <div class="row">
+        <div class="row mobileHide">
           <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #4285f4;margin: 2px;"></i></a></div>
           <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #db4437;margin: 2px;"></i></a></div>
           <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #f4b400;margin: 2px;"></i></a></div>
