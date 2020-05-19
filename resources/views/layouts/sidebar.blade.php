@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion p-0" style="background-color: #4285f4;">
+<nav id="sidebar" class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion p-0 " style="background-color: #4285f4;">
   <div class="container-fluid d-flex flex-column p-0">
     <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="{!! route('home') !!}">
       <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-code"></i></div>
