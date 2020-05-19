@@ -14,7 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
-
+<style>
+p { text-align: right; }
+@media only screen and (max-width: 900px) {
+  p { text-align: center; }
+}
+</style>
 <body style="background-color: #4285f4;">
     <div class="login-clean" style="background-color: #4285f4;">
         {{-- <form method="post" style="height: 490px;"> --}}
@@ -43,7 +48,7 @@
             <div class="form-group"><button class="btn btn-primary btn-block border rounded" type="submit" style="background-color: #343a40;">Log In</button></div>
         </form>
     </div>
-    <p class="text-right" style="color: #ffffff;margin-right: 20px;">© Copyright 2020 <a href="https://devsolo.tech/" target="blank" style="color: #ffffff;">Devsolo </a>- All Rights Reserved<br /></p>
+    <p style="color: #ffffff;margin-right: 20px;">© Copyright 2020 <a href="https://devsolo.tech/" target="blank" style="color: #ffffff;">Devsolo </a>- All Rights Reserved<br /></p>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/chart.min.js"></script>
