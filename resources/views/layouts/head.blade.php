@@ -9,6 +9,25 @@
 <link rel="stylesheet" href="{{asset('assets/fonts/fontawesome5-overrides.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/styles.min.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<script src="{{asset('assets/js/jquery.min.js')}}"></script>
+<script>
+$(function(){
+  //chagne color
+  if(localStorage.getItem("sidebarbgcolor")){
+    var sidebarcolor = localStorage.getItem("sidebarbgcolor");
+    $('nav.navbar').css('background',sidebarcolor);
+  }else{
+    var sidebarcolor = "gray";
+    $('nav.navbar').css('background',sidebarcolor);
+  }
+  // $('nav.navbar').css('background',localStorage.getItem("sidebarbgcolor"));
+  if (localStorage.getItem("sidebarbgcolor")=="#f4b400") {
+    $('a.nav-link').css('color', localStorage.getItem("sidebaracolor"));
+    $('.sidebar-brand').css('color', localStorage.getItem("sidebaracolor"));
+    $('i.chclr').css('color', localStorage.getItem("sidebaricolor"));
+  }
+});
+</script>
 @section('head')
 
 @show

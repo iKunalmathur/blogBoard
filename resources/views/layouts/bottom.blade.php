@@ -20,14 +20,8 @@ $(function() {
 </script>
 <script>
 $(document).ready(function(){
-
-
-  // console.log(sideclr);
-
-  // $("nav:first").addClass(sideclr);
-
   $('#link-goblue').on('click', function() {
-    $('nav').css('background', '#4285f4');
+    $('nav.navbar').css('background', '#4285f4');
     $('a.nav-link').css('color', '#fff');
     $('.sidebar-brand').css('color', '#fff');
     $('i.chclr').css('color', '#fff');
@@ -37,7 +31,7 @@ $(document).ready(function(){
   });
 
   $('#link-gored').on('click', function() {
-    $('nav').css('background', '#db4437');
+    $('nav.navbar').css('background', '#db4437');
     $('a.nav-link').css('color', '#fff');
     $('.sidebar-brand').css('color', '#fff');
     $('i.chclr').css('color', '#fff');
@@ -46,11 +40,10 @@ $(document).ready(function(){
   });
 
   $('#link-goyellow').on('click', function() {
-    $('nav').css('background', '#f4b400');
+    $('nav.navbar').css('background', '#f4b400');
     $('a.nav-link').css('color', '#5a5c69');
     $('.sidebar-brand').css('color', '#5a5c69');
     $('i.chclr').css('color', '#5a5c69');
-    $('.sidebar-dark .nav-item .nav-link[data-toggle=collapse]:after').css('color', '#5a5c69');
     var sidebarbgcolor = "#f4b400";
     var sidebaracolor = "#5a5c69";
     var sidebaricolor = "#5a5c69";
@@ -60,7 +53,7 @@ $(document).ready(function(){
   });
 
   $('#link-gogreen').on('click', function() {
-    $('nav').css('background', '#0f9d58');
+    $('nav.navbar').css('background', '#0f9d58');
     $('a.nav-link').css('color', '#fff');
     $('.sidebar-brand').css('color', '#fff');
     $('i.chclr').css('color', '#fff');
@@ -68,13 +61,6 @@ $(document).ready(function(){
     localStorage.setItem("sidebarbgcolor", sidebarbgcolor);
   });
 
-  //chagne color
-  $('nav.navbar').css('background',localStorage.getItem("sidebarbgcolor"));
-  if (localStorage.getItem("sidebarbgcolor")=="#f4b400") {
-    $('a.nav-link').css('color', localStorage.getItem("sidebaracolor"));
-    $('.sidebar-brand').css('color', localStorage.getItem("sidebaracolor"));
-    $('i.chclr').css('color', localStorage.getItem("sidebaricolor"));
-  }
 });
 </script>
 @section('bottom')
