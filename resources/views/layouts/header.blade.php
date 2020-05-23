@@ -15,10 +15,13 @@
       <div class="d-none d-sm-block topbar-divider "></div>
       <li class="nav-item pulse animated dropdown no-arrow" role="presentation" style="padding-top: 5px;">
         <div class="row mobileHide">
-          <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #4285f4;margin: 2px;"></i></a></div>
-          <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #db4437;margin: 2px;"></i></a></div>
-          <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #f4b400;margin: 2px;"></i></a></div>
-          <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #0f9d58;margin: 2px;"></i></a></div>
+          <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;">
+            <a href="#" onclick="event.preventDefault();" id="link-goblue"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #4285f4;margin: 2px;"></i>
+            </a>
+          </div>
+          <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#" onclick="event.preventDefault();" id="link-gored"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #db4437;margin: 2px;"></i></a></div>
+          <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#" onclick="event.preventDefault();" id="link-goyellow"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #f4b400;margin: 2px;"></i></a></div>
+          <div class="col" style="padding-right: 1px;padding-left: 1px;padding-bottom: 0px;"><a href="#" onclick="event.preventDefault();" id="link-gogreen"><i class="fa fa-circle" data-bs-hover-animate="pulse" style="color: #0f9d58;margin: 2px;"></i></a></div>
         </div>
       </li>
     </ul>
