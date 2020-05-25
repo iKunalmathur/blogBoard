@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion p-0">
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion p-0" style="background:#4285f4">
   <div class="container-fluid d-flex flex-column p-0">
     <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="{!! route('home') !!}">
       <div class="sidebar-brand-icon rotate-n-15"><i class="chclr fas fa-code"></i></div>
@@ -6,7 +6,7 @@
     </a>
     <hr class="sidebar-divider my-0">
     <ul class="nav navbar-nav text-light" id="accordionSidebar">
-      <li class="nav-item" role="presentation"><a class="nav-link" ><img src="{{asset('assets/img/avatars/avatar4.jpeg')}}"><span style="margin: 5px;">&nbsp;ADMINIA</span><p style="padding: 5px;padding-left: 0px;">Member Since Mar 31, 2020 Admin, writer, publisher<br></p></a></li>
+      <li class="nav-item" role="presentation"><a class="nav-link" ><img src="{{asset(Storage::disk('local')->url(Auth::user()->image))}}" width=60px height=60px><span style="margin: 5px;">&nbsp;{{ strtoupper(Auth::user()->name) }}</span><p style="padding: 5px;padding-left: 0px;">Member Since {{ Auth::user()->created_at->toFormattedDateString() }} Admin, writer, publisher<br></p></a></li>
       <hr class="sidebar-divider">
       <li class="nav-item" role="presentation"><a class="nav-link @yield('dashboardActive')" href="{!! route('home') !!}"><i class="chclr fas fa-tachometer-alt"></i><span>&nbsp;Dashboard</span></a></li>
       <hr class="sidebar-divider">

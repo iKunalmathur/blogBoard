@@ -3,82 +3,185 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view("user.show");
-    }
+  /**
+  * Display a listing of the resource.
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function index()
+  {
+    $users = User::all();
+    return view("user.show",compact("users"));
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view("user.create");
-    }
+  /**
+  * Show the form for creating a new resource.
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function create()
+  {
+    return view("user.create");
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  /**
+  * Store a newly created resource in storage.
+  *
+  * @param  \Illuminate\Http\Request  $request
+  * @return \Illuminate\Http\Response
+  */
+  public function store(Request $request)
+  {
+    // dd($request->all());
+    $this->validate($request,[
+      'username' => ['required', 'string', 'max:255'],
+      'first_name' => ['required', 'string', 'max:255'],
+      'last_name' => ['required', 'string', 'max:255'],
+      'email' => ['required', 'string', 'email', 'max:255',],
+      'password' => ['required',],
+      'password_confirmation' => ['required',],
+      'old_password' => ['required',],
+    ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    $user = new User;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return view("user.edit");
-    }
+    if (Hash::check($request->old_password, Auth::user()->password)){
+      // new password
+      if(isset($request->password)){
+        $this->validate($request,[
+          'password' => 'confirmed|min:6',
+        ]);
+        $user->password = Hash::make($request->password);
+        $request->session()->flash('success', 'Password Changed');
+      }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+      if ($request->hasFile('image')){
+        $imageName = $request->image->store('public/users_image');
+        $user->image = $imageName;
+      }
+      $request->status? $request['status']=1 : $request['status']=0;
+      // dd($request->status);
+      $user->status = $request->status;
+      $user->username = $request->username;
+      $user->fname = $request->first_name;
+      $user->lname = $request->last_name;
+      $user->email = $request->email;
+      $user->status = $request->status;
+      $isChanged = $user->isDirty();
+      $user->save();
+      if( $isChanged){
+       // changes have been made
+       return redirect()->back()->with('success','User Created');
+     }
+     return redirect()->back()->with('info','No changes has been made');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+
     }
+    else{
+
+      return redirect()->back()->with('danger', 'Admin Password does not match');
+      // $request->session()->flash('error', ' Password does not match');
+
+    }
+  }
+
+  /**
+  * Display the specified resource.
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function show($id)
+  {
+    //
+  }
+
+  /**
+  * Show the form for editing the specified resource.
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function edit($id)
+  {
+    $user = User::findorFail($id);
+    return view("user.edit",compact('user'));
+  }
+
+  /**
+  * Update the specified resource in storage.
+  *
+  * @param  \Illuminate\Http\Request  $request
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function update(Request $request, $id)
+  {
+    // dd($request->all());
+    $this->validate($request,[
+      'username' => ['required', 'string', 'max:255'],
+      'first_name' => ['required', 'string', 'max:255'],
+      'last_name' => ['required', 'string', 'max:255'],
+      'email' => ['required', 'string', 'email', 'max:255',],
+      'old_password' => ['required',],
+    ]);
+
+    $user = User::findOrFail($id);
+
+    if (Hash::check($request->old_password, Auth::user()->password)){
+      // new password
+      if(isset($request->password)){
+        $this->validate($request,[
+          'password' => 'confirmed|min:6',
+        ]);
+        $user->password = Hash::make($request->password);
+        $request->session()->flash('success', 'Password Changed');
+      }
+
+      if ($request->hasFile('image')){
+        $imageName = $request->image->store('public/users_image');
+        $user->image = $imageName;
+      }
+      $request->status? $request['status']=1 : $request['status']=0;
+      // dd($request->status);
+      $user->status = $request->status;
+      $user->username = $request->username;
+      $user->fname = $request->first_name;
+      $user->lname = $request->last_name;
+      $user->email = $request->email;
+      $user->status = $request->status;
+      $isChanged = $user->isDirty();
+      $user->save();
+      if( $isChanged){
+       // changes have been made
+       return redirect()->back()->with('success','User details has been Updated');
+     }
+     return redirect()->back()->with('info','No changes has been made');
+
+
+    }
+    else{
+
+      return redirect()->back()->with('danger', 'Admin Password does not match');
+      // $request->session()->flash('error', ' Password does not match');
+
+    }
+  }
+
+  /**
+  * Remove the specified resource from storage.
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function destroy($id)
+  {
+    User::findOrFail($id)->delete();
+    return redirect()->back()->with('success','User Deleted');
+  }
 }
