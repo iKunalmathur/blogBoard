@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Model\Tag;
 class TagController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view("tag.show");
+        $tags = Tag::all();
+        return view("tag.show",compact('tags'));
     }
 
     /**
@@ -34,7 +35,17 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      // dd($request->all());
+      $this->validate($request,[
+        'title' => ['required'],
+        'slug' => ['required'],
+      ]);
+
+      $tag = new Tag;
+      $tag->title = $request->title;
+      $tag->slug = $request->slug;
+      $tag->save();
+      return redirect()->back()->with('success','Tag Created');
     }
 
     /**
@@ -56,9 +67,9 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-      return view("tag.edit");
+      $tag = Tag::findOrFail($id);
+      return view("tag.edit",compact('tag'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -68,7 +79,18 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      // dd($request->all());
+      $this->validate($request,[
+        'title' => ['required'],
+        'slug' => ['required'],
+      ]);
+
+      $tag = Tag::findOrFail($id);
+      Tag::findOrFail($id)->update($request->except('_token','_method'));
+      // $tag->title = $request->title;
+      // $tag->slug = $request->slug;
+      // $tag->save();
+      return redirect()->route('tag.index')->with('success','Tag Updated');
     }
 
     /**
@@ -79,6 +101,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Tag::findOrFail($id)->delete();
+      return redirect()->back()->with('success','Tag Deleted');
     }
 }

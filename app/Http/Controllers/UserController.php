@@ -45,12 +45,12 @@ class UserController extends Controller
       'email' => ['required', 'string', 'email', 'max:255',],
       'password' => ['required',],
       'password_confirmation' => ['required',],
-      'old_password' => ['required',],
+      'Admin_password' => ['required',],
     ]);
 
     $user = new User;
 
-    if (Hash::check($request->old_password, Auth::user()->password)){
+    if (Hash::check($request->Admin_password, Auth::user()->password)){
       // new password
       if(isset($request->password)){
         $this->validate($request,[
@@ -128,12 +128,12 @@ class UserController extends Controller
       'first_name' => ['required', 'string', 'max:255'],
       'last_name' => ['required', 'string', 'max:255'],
       'email' => ['required', 'string', 'email', 'max:255',],
-      'old_password' => ['required',],
+      'Admin_password' => ['required',],
     ]);
 
     $user = User::findOrFail($id);
 
-    if (Hash::check($request->old_password, Auth::user()->password)){
+    if (Hash::check($request->Admin_password, Auth::user()->password)){
       // new password
       if(isset($request->password)){
         $this->validate($request,[

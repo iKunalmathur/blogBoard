@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Model\Category;
 class CategoryController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view("category.show");
+        $categories = Category::all();
+        return view("category.show",compact('categories'));
     }
 
     /**
@@ -34,7 +35,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      // dd($request->all());
+      $this->validate($request,[
+        'title' => ['required'],
+        'slug' => ['required'],
+      ]);
+
+      $category = new Category;
+      $category->title = $request->title;
+      $category->slug = $request->slug;
+      $category->save();
+      return redirect()->back()->with('success','Category Created');
     }
 
     /**
@@ -56,9 +67,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-      return view("category.edit");
+      $category = Category::findOrFail($id);
+      return view("category.edit",compact('category'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -68,7 +79,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      // dd($request->all());
+      $this->validate($request,[
+        'title' => ['required'],
+        'slug' => ['required'],
+      ]);
+
+      $category = Category::findOrFail($id);
+      Category::findOrFail($id)->update($request->except('_token','_method'));
+      // $category->title = $request->title;
+      // $category->slug = $request->slug;
+      // $category->save();
+      return redirect()->route('category.index')->with('success','Category Updated');
     }
 
     /**
@@ -79,6 +101,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Category::findOrFail($id)->delete();
+      return redirect()->back()->with('success','Category Deleted');
     }
 }

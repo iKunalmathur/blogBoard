@@ -29,6 +29,12 @@ $('i.chclr').css('color', localStorage.getItem("sidebaricolor"));
 }
 });
 </script> --}}
+<style>
+  .select2{
+    color: whitesmoke;
+  }
+  
+</style>
 @section('head')
 
 @show

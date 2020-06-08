@@ -202,7 +202,7 @@
               </div>
               <div class="form-row">
                 <div class="col">
-                  <div class="form-group"><label for="old_password"><strong>Admin Password</strong></label><input class="form-control" required type="text" name="old_password"></div>
+                  <div class="form-group"><label for="old_password"><strong>Admin Password</strong></label><input class="form-control" required type="text" name="Admin_password"></div>
                 </div>
                 <div class="col">
                   <div class="form-group">
