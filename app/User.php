@@ -10,6 +10,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function roles()
+    {
+        return $this->belongsToMany('App\Model\role','user_roles');
+    }
+
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -7,7 +7,9 @@
     <hr class="sidebar-divider my-0">
     <ul class="nav navbar-nav text-light" id="accordionSidebar">
       <li class="nav-item" role="presentation"><a class="nav-link" ><img src="{{asset(Storage::disk('local')->url(Auth::user()->image))}}" width=60px height=60px><span style="margin: 5px;">&nbsp;{{ strtoupper(Auth::user()->fname) }} {{ strtoupper(Auth::user()->lname) }}
-      </span><p style="padding: 5px;padding-left: 0px;">Member Since {{ Auth::user()->created_at->toFormattedDateString() }} Admin, writer, publisher<br></p></a></li>
+      </span><p style="padding: 5px;padding-left: 0px;">Member Since {{ Auth::user()->created_at->toFormattedDateString() }}&nbsp;&nbsp;&nbsp;&nbsp; |@foreach (Auth::user()->roles as $role)
+         {{ $role->name }} |
+        @endforeach<br></p></a></li>
       <hr class="sidebar-divider">
       <li class="nav-item" role="presentation"><a class="nav-link @yield('dashboardActive')" href="{!! route('home') !!}"><i class="chclr fas fa-tachometer-alt"></i><span>&nbsp;Dashboard</span></a></li>
       <hr class="sidebar-divider">

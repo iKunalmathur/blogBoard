@@ -110,7 +110,15 @@
           @foreach ($roles as $role)
           <div class="row">
               <div class="col">
-                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">{{$role->name}}</label></div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="role[]" value="{{ $role->id }}" id="formCheck-{{$role->id}}"
+                  @foreach ($user->roles as $user_role)
+                            @if ($user_role->id == $role->id)
+                              checked
+                            @endif
+                          @endforeach>
+                  <label class="form-check-label" for="formCheck-{{$role->id}}">{{$role->name}}</label>
+                </div>
               </div>
           </div>
         @endforeach

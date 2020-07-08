@@ -27,8 +27,8 @@ class UserController extends Controller
   */
   public function create()
   {
-
-    return view("user.create");
+    $roles = Role::all();
+    return view("user.create",compact("roles"));
   }
 
   /**
@@ -77,6 +77,7 @@ class UserController extends Controller
       $user->status = $request->status;
       $isChanged = $user->isDirty();
       $user->save();
+      $user->roles()->sync($request->role);
       if( $isChanged){
        // changes have been made
        return redirect()->back()->with('success','User Created');
@@ -161,6 +162,7 @@ class UserController extends Controller
       $user->status = $request->status;
       $isChanged = $user->isDirty();
       $user->save();
+      $user->roles()->sync($request->role);
       if( $isChanged){
        // changes have been made
        return redirect()->back()->with('success','User details has been Updated');
