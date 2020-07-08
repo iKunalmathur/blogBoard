@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Model\Permission_category;
+use App\Model\Role;
 class RoleController extends Controller
 {
     /**
@@ -13,7 +14,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-      return view("role.show");
+      $roles = Role::with('permissions:id,name')->select("id","name")->get();
+      // dd($roles);
+      return view("role.show",compact('roles'));
     }
 
     /**
@@ -23,7 +26,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-      return view("role.create");
+      $permission_categories = Permission_category::with('permission:id,name,permission_category_id')->get();
+      return view("role.create",compact("permission_categories"));
     }
 
     /**
@@ -34,7 +38,16 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $this->validate($request,[
+            'title' => 'required | max:15 | unique:Roles,name',
+            'permissions' => 'required'
+        ]);
+        $role = new Role;
+        $role->name = $request->title;
+        $role->save();
+        $role->permissions()->sync($request->permissions);
+        return redirect()->route('role.index')->with('success',"Role Created");
     }
 
     /**
@@ -56,7 +69,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-      return view("role.edit");
+      $permission_categories = Permission_category::with('permission:id,name,permission_category_id')->get();
+      $role = Role::with('permissions:id,name')->findorFail($id);
+      // dd($role);
+      return view("role.edit",compact("permission_categories","role"));
     }
 
     /**
@@ -68,7 +84,16 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      // dd($request->all());
+      $role = Role::findorFail($id);
+      $this->validate($request,[
+          'title' => 'required | max:15 | unique:Roles,name,'.$role->id,
+          'permissions' => 'required'
+      ]);
+      $role->name = $request->title;
+      $role->save();
+      $role->permissions()->sync($request->permissions);
+      return redirect()->route('role.index')->with('success',"Role Updated");
     }
 
     /**
@@ -79,6 +104,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Role::findorFail($id)->delete();
+      return redirect()->route('role.index')->with('success',"Role Deleted");
     }
 }

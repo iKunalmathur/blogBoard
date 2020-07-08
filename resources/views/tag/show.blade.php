@@ -5,10 +5,10 @@
 
   <div class="container-fluid">
       <div class="d-sm-flex justify-content-between align-items-center mb-4">
-          <h3 class="text-dark mb-0">Categories</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="{!! route('tag.create') !!}" style="background-color: #4285f4;"><i class="fas fa-plus fa-sm text-white-50"></i>&nbsp;Create</a></div>
+          <h3 class="text-dark mb-0">Tags</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="{!! route('tag.create') !!}" style="background-color: #4285f4;"><i class="fas fa-plus fa-sm text-white-50"></i>&nbsp;Create</a></div>
       <div class="card shadow">
           <div class="card-header py-3">
-              <p class="text-primary m-0 font-weight-bold">Categories List</p>
+              <p class="text-primary m-0 font-weight-bold">Tags List</p>
           </div>
           <div class="card-body">
               <div class="row">

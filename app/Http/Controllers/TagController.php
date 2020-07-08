@@ -36,6 +36,7 @@ class TagController extends Controller
     public function store(Request $request)
     {
       // dd($request->all());
+      $request->flash();
       $this->validate($request,[
         'title' => ['required'],
         'slug' => ['required'],

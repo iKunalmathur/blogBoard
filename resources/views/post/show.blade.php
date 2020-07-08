@@ -13,7 +13,7 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-    }
+    } 
 
     /* The actual popup */
     .popup .popuptext {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Model\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
@@ -26,6 +27,7 @@ class UserController extends Controller
   */
   public function create()
   {
+
     return view("user.create");
   }
 
@@ -38,6 +40,7 @@ class UserController extends Controller
   public function store(Request $request)
   {
     // dd($request->all());
+    $request->flash();
     $this->validate($request,[
       'username' => ['required', 'string', 'max:255'],
       'first_name' => ['required', 'string', 'max:255'],
@@ -110,7 +113,8 @@ class UserController extends Controller
   public function edit($id)
   {
     $user = User::findorFail($id);
-    return view("user.edit",compact('user'));
+    $roles = Role::all();
+    return view("user.edit",compact('user','roles'));
   }
 
   /**

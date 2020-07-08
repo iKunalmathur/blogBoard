@@ -2,11 +2,11 @@
 @section('postActive','active')
 @section('head')
   <!-- Select2 -->
-<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 @endsection
 @section('main-content')
-@include('includes.notify')
+  @include('includes.notify')
   <div class="container-fluid">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
       <h3 class="text-dark mb-0">Create Post</h3>
@@ -53,37 +53,37 @@
                 <div class="card shadow mb-3">
                   <div class="card-body">
                     <form role="form" action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                      @csrf
                       <div class="form-row">
                         <div class="col">
-                          <div class="form-group"><label for="title"><strong>Title</strong></label><input class="form-control" type="text" id="title" name="title"></div>
+                          <div class="form-group"><label for="title"><strong>Title</strong></label><input class="form-control" type="text" id="title" name="title" value="{{ old('title') }}"></div>
                         </div>
                         <div class="col">
-                          <div class="form-group"><label for="subtitle"><strong>Subtitle</strong><br></label><input class="form-control" type="text"  name="subtitle"></div>
+                          <div class="form-group"><label for="subtitle"><strong>Subtitle</strong><br></label><input class="form-control" type="text"  name="subtitle" value="{{ old('subtitle') }}"></div>
                         </div>
                       </div>
                       <div class="form-row">
                         <div class="col">
                           <div class="form-group"><label for="tag"><strong>Tags</strong></label>
                             <select class="form-control select2" multiple="multiple" name="tags[]">
-                            <optgroup label="Select Tag">
-                              @foreach ($tags as $tag)
+                              <optgroup label="Select Tag">
+                                @foreach ($tags as $tag)
                                   <option value="{{ $tag->id }}">{{ $tag->title }}</option>
-                              @endforeach
-                            </optgroup>
+                                @endforeach
+                              </optgroup>
                             </select>
                           </div>
                         </div>
                         <div class="col">
                           <div class="form-group"><label for="category"><strong>Category</strong><br></label>
                             <select class="form-control select2"  multiple="multiple" name="categories[]">
-                            <optgroup label="Select Category">
-                              @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->title }}</option>
-                            @endforeach
-                            </optgroup>
-                          </select>
-                        </div>
+                              <optgroup label="Select Category">
+                                @foreach ($categories as $category)
+                                  <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
+                              </optgroup>
+                            </select>
+                          </div>
                         </div>
                       </div>
                       <div class="form-row">
@@ -96,10 +96,15 @@
                           </div>
                         </div>
                       </div>
+                      <script type="text/javascript">
+                      $(function(){
+                        $("#ckeditor").val("{!! old('ckeditor') !!}");
+                      });
+                      </script>
                       <div class="form-row">
                         <div class="col">
                           <div class="form-group">
-                            <textarea cols="80" rows="10" id="ckeditor" name="ckeditor">
+                            <textarea cols="80" rows="10" id="ckeditor" name="ckeditor" >
                             </textarea>
                           </div>
                         </div>
@@ -110,22 +115,22 @@
                           <div class="col"><button class="btn btn-warning btn-sm" type="submit" style="color: #212529;background-color: #f4b400;">Back</button></div>
                         </div>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card mb-3">
-              <div class="card-body text-center shadow"><img class="img-thumbnail mb-3 mt-4" src="{{asset('assets/img/news-banner.png')}}" width="200" height="140">
-                <div class="mb-3"><button class="btn btn-primary btn-sm" type="button"><label for="image" style="
-    margin-bottom: 0;
-">Upload</label></button></div>
+            <div class="col-lg-4">
+              <div class="card mb-3">
+                <div class="card-body text-center shadow"><img class="img-thumbnail mb-3 mt-4" src="{{asset('assets/img/news-banner.png')}}" width="200" height="140">
+                  <div class="mb-3"><button class="btn btn-primary btn-sm" type="button"><label for="image" style="
+                  margin-bottom: 0;
+                  ">Upload</label></button></div>
 
-                <input type="file" id="image" hidden name="image" value="">
+                  <input type="file" id="image" hidden name="image" value="">
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
             <div class="card shadow mb-4">
               <div class="card-header py-3">
                 <h6 class="text-primary font-weight-bold m-0">Projects</h6>
@@ -166,14 +171,14 @@
   CKEDITOR.replace( 'ckeditor');
   </script>
   <script>
-    $("#title").keyup(function(){
-      var Text = $(this).val();
-      Text = Text.toLowerCase().replace(/[^a-z0-9\s]/gi, '');
-      var regExp = /\s+/g;
-      Text = Text.replace(regExp,'-');
-      // Text = Text.charAt(0).toUpperCase() + Text.slice(1);
-      $("#slug").val(Text);
-    });
+  $("#title").keyup(function(){
+    var Text = $(this).val();
+    Text = Text.toLowerCase().replace(/[^a-z0-9\s]/gi, '');
+    var regExp = /\s+/g;
+    Text = Text.replace(regExp,'-');
+    // Text = Text.charAt(0).toUpperCase() + Text.slice(1);
+    $("#slug").val(Text);
+  });
   </script>
   <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
   <script>

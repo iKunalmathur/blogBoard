@@ -1,6 +1,9 @@
 @extends('layouts.main')
 @section('userActive','active')
 @section('main-content')
+  {{-- ------------------- --}}
+  @include('includes.notify')
+  {{-- ------------------- --}}
   <div class="container-fluid">
       <h3 class="text-dark mb-4">Create Role</h3>
       <div class="row mb-3">
@@ -39,38 +42,29 @@
                   <div class="col">
                       <div class="card shadow mb-3">
                           <div class="card-header py-3">
-                              <p class="text-primary m-0 font-weight-bold">User Settings</p>
+                              <p class="text-primary m-0 font-weight-bold">Fill role info</p>
                           </div>
                           <div class="card-body">
-                              <form>
+                              <form action="{{ route('role.store') }}" method="post">
+                                @csrf
                                   <div class="form-row">
                                       <div class="col">
-                                          <div class="form-group"><label for="username"><strong>Username</strong></label><input class="form-control" type="text" placeholder="username" name="username"></div>
+                                          <div class="form-group"><label for="title"><strong>Role Title</strong></label><input class="form-control" type="text" name="title"></div>
                                       </div>
                                   </div>
                                   <div class="form-row">
+                                    @foreach ($permission_categories as $permission_category)
                                       <div class="col">
-                                          <div class="form-group"><label for="first_name"><strong>Post Permission</strong></label>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
+                                          <div class="form-group text-left"><label for=""><strong>{{ $permission_category->name }}</strong></label>
+                                            @foreach ($permission_category->permission as $permission)
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="formCheck-{{$permission->id}}"  name="permissions[]" value="{{ $permission->id}}">
+                                                <label class="form-check-label" for="formCheck-{{$permission->id}}">{{$permission->name}}</label>
+                                              </div>
+                                            @endforeach
                                           </div>
                                       </div>
-                                      <div class="col">
-                                          <div class="form-group"><label for="first_name"><strong>Post Permission</strong></label>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                          </div>
-                                      </div>
-                                      <div class="col">
-                                          <div class="form-group"><label for="first_name"><strong>Post Permission</strong></label>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Label</label></div>
-                                          </div>
-                                      </div>
+                                    @endforeach
                                   </div>
                                   <div class="form-group">
                                       <div class="form-row">

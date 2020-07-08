@@ -100,41 +100,20 @@
               $("#imageUpload").change(function () {
                 readURL(this);
               });
-              //# sourceURL=pen.js
               </script>
-              {{-- <img class="rounded-circle mb-3 mt-4" src="{{asset('assets/img/avatars/avatar4.jpeg')}}" width="160" height="160">
-              <div class="mb-3">
-              <button class="btn btn-primary btn-sm" type="button" style="background-color: #4285f4;">
-              <label for="exampleInputFile">Update</label>
-            </button>
-          </div>
-          <input  type="file" name="image"
-          id="exampleInputFile" hidden value="{{$user->image}}"> --}}
+
         </div>
       </div>
       <div class="card mb-3">
-        <div class="card-body text-center shadow">
+        <div class="card-body text-left shadow">
           <p class="text-primary m-0 font-weight-bold" style="color: #4285f4;">Assign Roles<br></p>
+          @foreach ($roles as $role)
           <div class="row">
-            <div class="col">
-              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Label</label></div>
-            </div>
-            <div class="col">
-              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Label</label></div>
-            </div>
-            <div class="col">
-              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Label</label></div>
-            </div>
-            <div class="col">
-              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Label</label></div>
-            </div>
-            <div class="col">
-              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Label</label></div>
-            </div>
-            <div class="col">
-              <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Label</label></div>
-            </div>
+              <div class="col">
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">{{$role->name}}</label></div>
+              </div>
           </div>
+        @endforeach
         </div>
       </div>
     </div>

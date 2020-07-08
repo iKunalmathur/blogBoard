@@ -77,7 +77,7 @@
               </style>
               <div class="avatar-upload">
                 <div class="avatar-edit">
-                  <input type='file' id="imageUpload"  name="image" accept=".png, .jpg, .jpeg" />
+                  <input type='file' id="imageUpload" name="image" accept=".png, .jpg, .jpeg" value="{{ old('image') }}"/>
                   <label for="imageUpload"></label>
                 </div>
                 <div class="avatar-preview">
@@ -178,31 +178,37 @@
             <div class="card-body">
               <div class="form-row">
                 <div class="col">
-                  <div class="form-group"><label for="username"><strong>Username</strong></label><input class="form-control" type="text"  name="username"></div>
+                  <div class="form-group"><label for="username"><strong>Username</strong></label>
+                    <input class="form-control" type="text" name="username" value="{{ old('username') }}"></div>
                 </div>
                 <div class="col">
-                  <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email"  name="email"></div>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col">
-                  <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text"  name="first_name"></div>
-                </div>
-                <div class="col">
-                  <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text"  name="last_name"></div>
+                  <div class="form-group"><label for="email"><strong>Email Address</strong></label>
+                    <input class="form-control" type="email" name="email" value="{{ old('email') }}"></div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col">
-                  <div class="form-group"><label for="new_password"><strong>Create Password</strong></label><input class="form-control" type="text" required name="password"></div>
+                  <div class="form-group"><label for="first_name"><strong>First Name</strong></label>
+                    <input class="form-control" type="text" name="first_name" value="{{ old('first_name') }}"></div>
                 </div>
                 <div class="col">
-                  <div class="form-group"><label for="confirm_password"><strong>Confirm Password</strong></label><input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" required placeholder="Password (repeat)" name="password_confirmation"  autocomplete="new-password"></div>
+                  <div class="form-group"><label for="last_name"><strong>Last Name</strong></label>
+                    <input class="form-control" type="text" name="last_name" value="{{ old('last_name') }}"></div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col">
-                  <div class="form-group"><label for="old_password"><strong>Admin Password</strong></label><input class="form-control" required type="text" name="Admin_password"></div>
+                  <div class="form-group"><label for="new_password"><strong>Create Password</strong></label>
+                    <input class="form-control" type="text" required name="password"></div>
+                </div>
+                <div class="col">
+                  <div class="form-group"><label for="confirm_password"><strong>Confirm Password</strong></label>
+                    <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" required placeholder="Password (repeat)" name="password_confirmation"  autocomplete="new-password"></div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group"><label for="Admin_password"><strong>Admin Password</strong></label><input class="form-control" required type="password" name="Admin_password"></div>
                 </div>
                 <div class="col">
                   <div class="form-group">

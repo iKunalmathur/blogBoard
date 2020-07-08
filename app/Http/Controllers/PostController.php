@@ -12,7 +12,7 @@ class PostController extends Controller
 {
   /**
   * Display a listing of the resource.
-  *
+  * 
   * @return \Illuminate\Http\Response
   */
   public function index()
@@ -43,6 +43,7 @@ class PostController extends Controller
   public function store(Request $request)
   {
     // dd($request->all());
+    $request->flash();
     $this->validate($request,[
       "title" => "required",
       "subtitle" => "required",

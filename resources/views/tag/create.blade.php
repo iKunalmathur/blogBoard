@@ -51,7 +51,7 @@
                       @csrf
                       <div class="form-row">
                         <div class="col">
-                          <div class="form-group"><label for="title"><strong>Tag title</strong><br></label><input class="form-control" type="text" id="title" name="title" autofocus></div>
+                          <div class="form-group"><label for="title"><strong>Tag title</strong><br></label><input class="form-control" type="text" id="title" name="title" autofocus value="{{ old('title') }}"></div>
                           <div class="form-group"><label for="slug"><strong>Slug</strong><br></label><input class="form-control" type="text" id="slug" name="slug"></div>
                         </div>
                         <div class="col"></div>
