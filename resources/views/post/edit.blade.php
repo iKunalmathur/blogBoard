@@ -103,11 +103,13 @@
                         <div class="col">
                           <div class="form-group"><label for="slug"><strong>Slug</strong></label><input class="form-control" type="text" id="slug" name="slug" value="{{ $post->slug }}"></div>
                         </div>
+                        @can('posts.publisher', Auth::user())
                         <div class="col">
                           <div class="form-group" style="margin: 0px;margin-top: 38px;margin-bottom: 0px;">
                             <div class="custom-control custom-switch"><input class="custom-control-input" type="checkbox" name="status" id="formCheck-1" @if($post->status == 1) {{'checked'}} @endif><label class="custom-control-label" for="formCheck-1"><strong>Publish</strong><br></label></div>
                           </div>
                         </div>
+                      @endcan
                       </div>
                       <div class="form-row">
                         <div class="col">

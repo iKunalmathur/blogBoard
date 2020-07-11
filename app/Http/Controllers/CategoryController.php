@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Category;
+use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
     /**
@@ -13,8 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
+      if (Auth::user()->can('categories.view')) {
         $categories = Category::all();
         return view("category.show",compact('categories'));
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -24,7 +28,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
+      if (Auth::user()->can('categories.create')) {
         return view("category.create");
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -68,8 +75,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-      $category = Category::findOrFail($id);
-      return view("category.edit",compact('category'));
+      if (Auth::user()->can('categories.update')) {
+        $category = Category::findOrFail($id);
+        return view("category.edit",compact('category'));
+        }
+        return redirect()->back()->with('danger','Access Denied');
     }
     /**
      * Update the specified resource in storage.
@@ -102,7 +112,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-      Category::findOrFail($id)->delete();
-      return redirect()->back()->with('success','Category Deleted');
+      if (Auth::user()->can('categories.delete')) {
+        Category::findOrFail($id)->delete();
+        return redirect()->back()->with('success','Category Deleted');
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 }

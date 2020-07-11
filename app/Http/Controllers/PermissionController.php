@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Permission;
 use App\Model\Permission_category;
 use Validator;
-
+use Illuminate\Support\Facades\Auth;
 class PermissionController extends Controller
 {
     /**
@@ -16,12 +16,12 @@ class PermissionController extends Controller
      */
     public function index()
     {
+      if (Auth::user()->can('permissions.view')) {
+        // code...
         $permissions = Permission::with('permission_category:id,name')->get();
-        // foreach ($permissions as $permission) {
-        //   // code...
-        //   dd($permission->permission_category);
-        // }
         return view("permission.show",compact('permissions'));
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -31,7 +31,10 @@ class PermissionController extends Controller
      */
     public function create()
     {
-      return view("permission.create");
+      if (Auth::user()->can('permissions.create')) {
+        return view("permission.create");
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -72,9 +75,11 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-      $permission = Permission::with('permission_category:id,name')->findorFail($id);
-      return view("permission.edit",compact('permission'));
-
+      if (Auth::user()->can('permissions.update')) {
+        $permission = Permission::with('permission_category:id,name')->findorFail($id);
+        return view("permission.edit",compact('permission'));
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -104,8 +109,11 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-      Permission::findorFail($id)->delete();
-      return redirect()->back()->with('success',"Permission Deleted");
+      if (Auth::user()->can('permissions.delete')) {
+        Permission::findorFail($id)->delete();
+        return redirect()->back()->with('success',"Permission Deleted");
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 
     public function create_category(Request $request)

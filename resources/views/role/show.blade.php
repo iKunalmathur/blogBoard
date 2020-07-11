@@ -36,7 +36,7 @@
                     <td>{{$role->name}}</td>
                     <td>
                       @foreach ($role->permissions as $permission)
-                        {{ $permission->name }},
+                        {{ $permission->permission_category->name}} {{ $permission->name }},
                       @endforeach
                     </td>
                     <td><a class="btn btn-warning btn-icon-split" href="{!! route('role.edit',$role->id) !!}" role="button" style="background-color: #f4b400;"><span class="text-white text"><i class="fa fa-edit"></i></span></a></td>

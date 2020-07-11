@@ -12,24 +12,37 @@
         @endforeach<br></p></a></li>
       <hr class="sidebar-divider">
       <li class="nav-item" role="presentation"><a class="nav-link @yield('dashboardActive')" href="{!! route('home') !!}"><i class="chclr fas fa-tachometer-alt"></i><span>&nbsp;Dashboard</span></a></li>
-      <hr class="sidebar-divider">
-      <li class="nav-item" role="presentation">
-        <div><a class="btn btn-link nav-link @yield('userActive')" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button"><i class="chclr fas fa-user"></i>&nbsp;<span>User</span></a>
-          <div class="collapse" id="collapse-1">
-            <div class="bg-white border rounded py-2 collapse-inner">
-              <h6 class="collapse-header">USER COMPONENTS:</h6>
-              <a class="collapse-item" href="{!! route('user.index') !!}">Users</a>
-              <a class="collapse-item" href="{!! route('role.index') !!}">Roles</a>
-              <a class="collapse-item" href="{!! route('permission.index') !!}">Permissions</a></div>
+      @canany (['users.view','roles.view','permissions.view'], Auth::user())
+        <hr class="sidebar-divider">
+        <li class="nav-item" role="presentation">
+          <div><a class="btn btn-link nav-link @yield('userActive')" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button"><i class="chclr fas fa-user"></i>&nbsp;<span>User</span></a>
+            <div class="collapse" id="collapse-1">
+              <div class="bg-white border rounded py-2 collapse-inner">
+                <h6 class="collapse-header">USER COMPONENTS:</h6>
+                @can ('users.view', Auth::user())
+                  <a class="collapse-item" href="{!! route('user.index') !!}">Users</a>
+                @endcan
+                @can ('roles.view', Auth::user())
+                  <a class="collapse-item" href="{!! route('role.index') !!}">Roles</a>
+                @endcan
+                @can ('permissions.view', Auth::user())
+                  <a class="collapse-item" href="{!! route('permission.index') !!}">Permissions</a></div>                  
+                @endcan
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+      @endcan
+
         <hr class="sidebar-divider">
         <li class="nav-item" role="presentation"><a class="nav-link @yield('postActive')" href="{!! route('post.index') !!}"><i class="chclr fas fa-sticky-note"></i><span>&nbsp;Posts</span></a></li>
-        <hr class="sidebar-divider">
-        <li class="nav-item" role="presentation"><a class="nav-link @yield('categoryActive')" href="{!! route('category.index') !!}"><i class="chclr fas fa-puzzle-piece"></i><span>&nbsp;Categories</span></a></li>
-        <hr class="sidebar-divider">
-        <li class="nav-item" role="presentation"><a class="nav-link @yield('tagActive')" href="{!! route('tag.index') !!}"><i class="chclr fas fa-tags"></i><span>&nbsp;Tags</span></a></li>
+        @can ('categories.view', Auth::user())
+          <hr class="sidebar-divider">
+          <li class="nav-item" role="presentation"><a class="nav-link @yield('categoryActive')" href="{!! route('category.index') !!}"><i class="chclr fas fa-puzzle-piece"></i><span>&nbsp;Categories</span></a></li>
+        @endcan
+        @can ('tags.view', Auth::user())
+          <hr class="sidebar-divider">
+          <li class="nav-item" role="presentation"><a class="nav-link @yield('tagActive')" href="{!! route('tag.index') !!}"><i class="chclr fas fa-tags"></i><span>&nbsp;Tags</span></a></li>
+        @endcan
         <hr class="sidebar-divider">
       </ul>
     </div>

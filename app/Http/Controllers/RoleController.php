@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Permission_category;
 use App\Model\Role;
+use Illuminate\Support\Facades\Auth;
+
 class RoleController extends Controller
 {
     /**
@@ -14,9 +16,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-      $roles = Role::with('permissions:id,name')->select("id","name")->get();
-      // dd($roles);
-      return view("role.show",compact('roles'));
+      if (Auth::user()->can('roles.view')) {
+        // code...
+        $roles = Role::with('permissions')->select("id","name")->get();
+        return view("role.show",compact('roles'));
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -26,8 +31,11 @@ class RoleController extends Controller
      */
     public function create()
     {
+      if (Auth::user()->can('roles.create')) {
       $permission_categories = Permission_category::with('permission:id,name,permission_category_id')->get();
       return view("role.create",compact("permission_categories"));
+    }
+    return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -69,10 +77,12 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+      if (Auth::user()->can('roles.update')) {
       $permission_categories = Permission_category::with('permission:id,name,permission_category_id')->get();
       $role = Role::with('permissions:id,name')->findorFail($id);
-      // dd($role);
       return view("role.edit",compact("permission_categories","role"));
+    }
+    return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -104,7 +114,10 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+      if (Auth::user()->can('roles.delete')) {
       Role::findorFail($id)->delete();
       return redirect()->route('role.index')->with('success',"Role Deleted");
+    }
+    return redirect()->back()->with('danger','Access Denied');
     }
 }

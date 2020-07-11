@@ -12,7 +12,7 @@ class PostController extends Controller
 {
   /**
   * Display a listing of the resource.
-  * 
+  *
   * @return \Illuminate\Http\Response
   */
   public function index()
@@ -29,9 +29,12 @@ class PostController extends Controller
   */
   public function create()
   {
+    if (Auth::user()->can('posts.create')) {
     $tags = tag::all();
     $categories = category::all();
     return view('post.create',compact('tags','categories'));
+  }
+      return redirect()->back()->with('danger','Access Denied');
   }
 
   /**
@@ -87,10 +90,13 @@ class PostController extends Controller
   */
   public function edit($id)
   {
+    if (Auth::user()->can('posts.update')) {
     $post = post::findorfail($id);
     $tags = tag::all();
     $categories = category::all();
     return view('post.edit',compact('post','categories','tags'));
+  }
+      return redirect()->back()->with('danger','Access Denied');
   }
 
   /**
@@ -140,7 +146,10 @@ class PostController extends Controller
   */
   public function destroy($id)
   {
-    Post::findOrFail($id)->delete();
-    return redirect()->back()->with('success','Post Deleted');
+    if (Auth::user()->can('posts.delete')) {
+      Post::findOrFail($id)->delete();
+      return redirect()->back()->with('success','Post Deleted');
+    }
+      return redirect()->back()->with('danger','Access Denied');
   }
 }

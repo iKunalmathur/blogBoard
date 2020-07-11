@@ -16,8 +16,11 @@ class UserController extends Controller
   */
   public function index()
   {
-    $users = User::all();
-    return view("user.show",compact("users"));
+    if (Auth::user()->can('users.view')) {
+      $users = User::all();
+      return view("user.show",compact("users"));
+    }
+    return redirect()->back()->with('danger','Access Denied');
   }
 
   /**
@@ -27,8 +30,11 @@ class UserController extends Controller
   */
   public function create()
   {
+    if (Auth::user()->can('users.create')) {
     $roles = Role::all();
     return view("user.create",compact("roles"));
+  }
+  return redirect()->back()->with('danger','Access Denied');
   }
 
   /**
@@ -80,7 +86,7 @@ class UserController extends Controller
       $user->roles()->sync($request->role);
       if( $isChanged){
        // changes have been made
-       return redirect()->back()->with('success','User Created');
+       return redirect()->route("user.index")->with('success','User Created');
      }
      return redirect()->back()->with('info','No changes has been made');
 
@@ -113,9 +119,12 @@ class UserController extends Controller
   */
   public function edit($id)
   {
+    if (Auth::user()->can('users.update')) {
     $user = User::findorFail($id);
     $roles = Role::all();
     return view("user.edit",compact('user','roles'));
+  }
+  return redirect()->back()->with('danger','Access Denied');
   }
 
   /**
@@ -187,7 +196,10 @@ class UserController extends Controller
   */
   public function destroy($id)
   {
+    if (Auth::user()->can('users.delete')) {
     User::findOrFail($id)->delete();
     return redirect()->back()->with('success','User Deleted');
+  }
+  return redirect()->back()->with('danger','Access Denied');
   }
 }

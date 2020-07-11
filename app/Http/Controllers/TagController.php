@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Tag;
+use Illuminate\Support\Facades\Auth;
 class TagController extends Controller
 {
     /**
@@ -13,8 +14,11 @@ class TagController extends Controller
      */
     public function index()
     {
+      if (Auth::user()->can('tags.view')) {
         $tags = Tag::all();
         return view("tag.show",compact('tags'));
+      }
+      return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -24,7 +28,10 @@ class TagController extends Controller
      */
     public function create()
     {
+      if (Auth::user()->can('tags.create')) {
         return view("tag.create");
+    }
+    return redirect()->back()->with('danger','Access Denied');
     }
 
     /**
@@ -68,8 +75,11 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-      $tag = Tag::findOrFail($id);
-      return view("tag.edit",compact('tag'));
+      if (Auth::user()->can('tags.update')) {
+        $tag = Tag::findOrFail($id);
+        return view("tag.edit",compact('tag'));
+    }
+    return redirect()->back()->with('danger','Access Denied');
     }
     /**
      * Update the specified resource in storage.
@@ -102,7 +112,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-      Tag::findOrFail($id)->delete();
-      return redirect()->back()->with('success','Tag Deleted');
+      if (Auth::user()->can('tags.delete')) {
+        Tag::findOrFail($id)->delete();
+        return redirect()->back()->with('success','Tag Deleted');
+    }
+    return redirect()->back()->with('danger','Access Denied');
     }
 }

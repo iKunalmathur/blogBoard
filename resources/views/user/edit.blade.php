@@ -104,6 +104,7 @@
 
         </div>
       </div>
+      @can('users.assignRole', Auth::user())
       <div class="card mb-3">
         <div class="card-body text-left shadow">
           <p class="text-primary m-0 font-weight-bold" style="color: #4285f4;">Assign Roles<br></p>
@@ -124,6 +125,7 @@
         @endforeach
         </div>
       </div>
+    @endcan
     </div>
     <div class="col-lg-8">
       <div class="row mb-3 d-none">
