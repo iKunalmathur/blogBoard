@@ -31,13 +31,13 @@ class AuthServiceProvider extends ServiceProvider
           Gate::resource('users', 'App\Policies\UserPolicy');
           Gate::define('users.assignRole', 'App\Policies\UserPolicy@assignRole');
         //roles
-          Gate::resource('roles', 'App\Policies\rolePolicy');
+          Gate::resource('roles', 'App\Policies\RolePolicy');
         //permissions
           Gate::resource('permissions','App\Policies\PermissionPolicy');
         //categories
           Gate::resource('categories','App\Policies\CategoryPolicy');
         //tags
           Gate::resource('tags','App\Policies\TagPolicy');
-          
+
     }
 }

@@ -10,6 +10,6 @@ class Permission_category extends Model
 
   public function permission()
   {
-    return $this->hasMany('App\Model\permission');
+    return $this->hasMany('App\Model\Permission');
   }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\post;
-use App\Model\tag;
-use App\Model\category;
+use App\Model\Post;
+use App\Model\Tag;
+use App\Model\Category;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -17,7 +17,7 @@ class PostController extends Controller
   */
   public function index()
   {
-    $posts = post::with('user:id,fname,lname')->get();
+    $posts = Post::with('user:id,fname,lname')->get();
     // dd($posts);
     return view("post.show",compact('posts'));
   }
@@ -30,7 +30,7 @@ class PostController extends Controller
   public function create()
   {
     if (Auth::user()->can('posts.create')) {
-    $tags = tag::all();
+    $tags = Tag::all();
     $categories = category::all();
     return view('post.create',compact('tags','categories'));
   }
@@ -54,7 +54,7 @@ class PostController extends Controller
       "ckeditor" => "required",
       // "image" => "required",
     ]);
-    $post = new post;
+    $post = new Post;
     if ($request->hasFile('image')){
       $imageName = $request->image->store('public/posts_images');
       $post->image = $imageName;
@@ -91,8 +91,8 @@ class PostController extends Controller
   public function edit($id)
   {
     if (Auth::user()->can('posts.update')) {
-    $post = post::findorfail($id);
-    $tags = tag::all();
+    $post = Post::findorfail($id);
+    $tags = Tag::all();
     $categories = category::all();
     return view('post.edit',compact('post','categories','tags'));
   }
@@ -115,7 +115,7 @@ class PostController extends Controller
            "ckeditor" => "required",
            // "image" => "required",
        ]);
-       $post = post::findOrFail($id);
+       $post = Post::findOrFail($id);
        if ($request->hasFile('image')){
            $imageName = $request->image->store('public/posts_images');
            $post->image = $imageName;
