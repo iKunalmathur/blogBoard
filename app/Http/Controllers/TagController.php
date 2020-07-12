@@ -98,9 +98,6 @@ class TagController extends Controller
 
       $tag = Tag::findOrFail($id);
       Tag::findOrFail($id)->update($request->except('_token','_method'));
-      // $tag->title = $request->title;
-      // $tag->slug = $request->slug;
-      // $tag->save();
       return redirect()->route('tag.index')->with('success','Tag Updated');
     }
 

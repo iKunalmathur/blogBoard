@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany('App\Model\role','user_roles');
+        return $this->belongsToMany('App\Model\Role','user_roles');
     }
 
     public function getNameAttribute($value)
