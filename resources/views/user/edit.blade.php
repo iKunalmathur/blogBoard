@@ -183,7 +183,7 @@
               </div>
               <div class="form-row">
                 <div class="col">
-                  <div class="form-group"><label for="new_password"><strong>New Password</strong></label><input class="form-control" type="text"  name="password"></div>
+                  <div class="form-group"><label for="new_password"><strong>New Password</strong></label><input class="form-control" type="password"  name="password"></div>
                 </div>
                 <div class="col">
                   <div class="form-group"><label for="confirm_password"><strong>Confirm Password</strong></label><input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password (repeat)" name="password_confirmation"  autocomplete="new-password"></div>
@@ -191,7 +191,7 @@
               </div>
               <div class="form-row">
                 <div class="col">
-                  <div class="form-group"><label for="Admin_password"><strong>Admin Password</strong></label><input class="form-control" type="text" name="Admin_password"></div>
+                  <div class="form-group"><label for="Admin_password"><strong>Admin Password</strong></label><input class="form-control" type="password" name="Admin_password" required></div>
                 </div>
                 <div class="col">
                   <div class="form-group">

@@ -48,7 +48,7 @@ class RoleController extends Controller
     {
         // dd($request->all());
         $this->validate($request,[
-            'title' => 'required | max:15 | unique:Roles,name',
+            'title' => 'required | max:15 | unique:roles,name',
             'permissions' => 'required'
         ]);
         $role = new Role;
@@ -97,7 +97,7 @@ class RoleController extends Controller
       // dd($request->all());
       $role = Role::findorFail($id);
       $this->validate($request,[
-          'title' => 'required | max:15 | unique:Roles,name,'.$role->id,
+          'title' => 'required | max:15 | unique:roles,name,'.$role->id,
           'permissions' => 'required'
       ]);
       $role->name = $request->title;

@@ -10,7 +10,7 @@ class Permission extends Model
 
   public function permission_category()
   {
-    return $this->belongsTo('App\Model\permission_category');
+    return $this->belongsTo('App\Model\Permission_category');
   }
   // public function roles()
   // {

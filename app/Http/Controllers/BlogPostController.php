@@ -19,6 +19,6 @@ class BlogPostController extends Controller
    // }
    public function getAllPost()
    {
-     return $posts=post::where('status',1)->orderBy('created_at','DESC')->paginate(4);
+     return $posts=Post::where('status',1)->orderBy('created_at','DESC')->paginate(4);
    }
 }

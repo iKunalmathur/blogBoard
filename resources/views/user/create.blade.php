@@ -189,7 +189,7 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group"><label for="new_password"><strong>Create Password</strong></label>
-                    <input class="form-control" type="text" required name="password"></div>
+                    <input class="form-control" type="password" required name="password"></div>
                 </div>
                 <div class="col">
                   <div class="form-group"><label for="confirm_password"><strong>Confirm Password</strong></label>

@@ -8,15 +8,15 @@ class Post extends Model
 {
   public function tags()
   {
-    return $this->belongsToMany('App\Model\tag','tag_posts')->withtimestamps();
+    return $this->belongsToMany('App\Model\Tag','tag_posts')->withtimestamps();
   }
   public function categories()
   {
-    return $this->belongsToMany('App\Model\category','category_posts')->withtimestamps();
+    return $this->belongsToMany('App\Model\Category','category_posts')->withtimestamps();
   }
   public function user()
   {
-    return $this->belongsTo('App\user');
+    return $this->belongsTo('App\User');
   }
   public function getRouteKeyName()
   {
