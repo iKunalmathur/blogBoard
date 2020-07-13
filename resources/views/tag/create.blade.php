@@ -59,7 +59,9 @@
                       <div class="form-group">
                         <div class="form-row">
                           <div class="col-auto"><button class="btn btn-primary btn-sm" type="submit" style="background-color: #4285f4;">Create</button></div>
-                          <div class="col"><button class="btn btn-warning btn-sm" type="submit" style="color: #212529;background-color: #f4b400;">Back</button></div>
+                          <div class="col">
+                            <a href="{!! route('tag.index') !!}" class="btn btn-warning btn-sm" type="submit" style="color: #212529;background-color: #f4b400;">Back</a>
+                          </div>
                         </div>
                       </div>
                     </form>

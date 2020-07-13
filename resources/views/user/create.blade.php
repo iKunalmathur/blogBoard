@@ -210,7 +210,9 @@
                 <div class="form-group">
                   <div class="form-row">
                     <div class="col-auto"><button class="btn btn-primary btn-sm" type="submit" style="background-color: #4285f4;">Save</button></div>
-                    <div class="col"><button class="btn btn-warning btn-sm" type="button" style="color: #212529;background-color: #f4b400;">Back</button></div>
+                    <div class="col">
+                      <a class="btn btn-warning btn-sm" href="{{ url()->previous() }}"  style="color: #212529;background-color: #f4b400;">Back</a>
+                    </div>
                   </div>
                 </div>
               </form>
